@@ -253,11 +253,11 @@ def remap(args, region_fastqs, all_fastqs):
                     fasta_base,
                     "-S", output], stderr =minierr)
                 else:
-                    cmd = ["minimap2", "-ax", "splice", "-t", str(args.threads), "-G50k", "-k", "21",
+                    cmd = ["minimap2", "-ax", "splice", "-I", "8g", "--split-prefix=tmp", "-t", str(args.threads), "-G50k", "-k", "21",
                         "-w", "11", "--sr", "-A2", "-B8", "-O12,32", "-E2,1", "-r200", "-p.5", "-N20", "-f1000,5000",
                         "-n2", "-m20", "-s40", "-g2000", "-2K50m", "--secondary=no", args.fasta, args.out_dir + "/tmp.fq"]
                     minierr.write(" ".join(cmd)+"\n")
-                    subprocess.check_call(["minimap2", "-ax", "splice", "-t", str(args.threads), "-G50k", "-k", "21", 
+                    subprocess.check_call(["minimap2", "-ax", "splice", "-I", "8g", "--split-prefix=tmp", "-t", str(args.threads), "-G50k", "-k", "21", 
                         "-w", "11", "--sr", "-A2", "-B8", "-O12,32", "-E2,1", "-r200", "-p.5", "-N20", "-f1000,5000",
                         "-n2", "-m20", "-s40", "-g2000", "-2K50m", "--secondary=no", args.fasta, args.out_dir + "/tmp.fq"], 
                         stdout = samfile, stderr = minierr)
@@ -446,7 +446,7 @@ def freebayes(args, bam, fasta):
                     
                 cmd = ["freebayes", "-f", args.fasta, "-iXu", "-C", "2",
                     "-q", "20", "-n", "3", "-E", "1", "-m", "30", 
-                    "--min-coverage", str(int(args.min_alt)+int(args.min_ref)), "--pooled-continuous", "--skip-coverage", "100000"]
+                    "--min-coverage", str(int(args.min_alt)+int(args.min_ref)), "--pooled-continuous"]
                 
                 cmd.extend(["-r", chrom + ":" + str(start) + "-" + str(end)])
                 print(" ".join(cmd))
@@ -601,5 +601,4 @@ if not(os.path.exists(args.out_dir + "/consensus.done")):
 print("done")
 
 #### END MAIN RUN SCRIPT        
-
 

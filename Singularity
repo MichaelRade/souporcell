@@ -52,14 +52,15 @@ From: ubuntu:18.04
     rustup default stable
     apt-get -y install git
     cd /opt
-    git clone --recursive https://github.com/wheaton5/souporcell.git
+    git clone --recursive https://github.com/MichaelRade/souporcell.git
     cd souporcell/troublet
     cargo build --release
     cd /opt/souporcell/souporcell
     cargo build --release
     cd /opt
     pip install pysam
-    pip install git+https://github.com/stan-dev/pystan2.git@master
+    pip install pystan
+    # pip install git+https://github.com/stan-dev/pystan2.git@master
     pip install pyfaidx
     pip install "setuptools<58" --upgrade
     pip install pyvcf
