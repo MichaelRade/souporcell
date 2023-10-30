@@ -59,8 +59,9 @@ From: ubuntu:18.04
     cargo build --release
     cd /opt
     pip install pysam
-    pip install pystan
-    # pip install git+https://github.com/stan-dev/pystan2.git@master
+    # pip install pystan
+    pip install Cython
+    pip install git+https://github.com/stan-dev/pystan2.git@master
     pip install pyfaidx
     pip install "setuptools<58" --upgrade
     pip install pyvcf
